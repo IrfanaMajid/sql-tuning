@@ -1,6 +1,11 @@
 USE AdventureWorks2017;
 GO
 
+-- Database should have multiple data files in proportion to the number of processors.
+-- Each file should be identical in initial size and growth increments.
+SELECT	*
+FROM	sys.database_files;
+
 SELECT	name, recovery_model_desc
 FROM	sys.databases;
 GO
@@ -15,6 +20,7 @@ DBCC OPENTRAN;
 -- View log size.
 DBCC SQLPERF('logspace');
 GO
+
 -- Or:
 SELECT	instance_name as [Database]
 		, cntr_value as "LogFullPct"
