@@ -3,7 +3,7 @@
   <Items>
     <LogicalFolder Name="Connections" Type="2" Sorted="true">
       <Items>
-        <ConnectionNode Name="localhost:USCORP\RicardoGu">
+        <ConnectionNode Name="localhost:ALLORNOTHING\rguzman">
           <Created>2018-02-18T16:32:15.6943322-05:00</Created>
           <Type>SQL</Type>
           <Server>localhost</Server>
@@ -72,6 +72,18 @@
           <AssociatedConnSrvName>localhost</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>7b_Tran.sql</FullPath>
+        </FileNode>
+        <FileNode Name="8_Trace.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:localhost:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>localhost</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>8_Trace.sql</FullPath>
+        </FileNode>
+        <FileNode Name="8b_Trace.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:localhost:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>localhost</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>8b_Trace.sql</FullPath>
         </FileNode>
         <FileNode Name="Scratch2.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:localhost:True</AssociatedConnectionMoniker>
