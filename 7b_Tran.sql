@@ -1,23 +1,58 @@
 USE ScratchDB;
 GO
 
-SET TRANSACTION ISOLATION LEVEL SNAPSHOT;
+-- Ex 1: RCSI writer does not block RCSI reader (toggle READ_COMMITTED_SNAPSHOT).
+-- Ex 2: RC writer does block RC reader (toggle READ_COMMITTED_SNAPSHOT).
+-- Ex 3: RC/RCSI reader does not block RC/RCSI writer under RC/RCSI (because S locks 
+--		 are not held until end of transaction).
+/*
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 
-BEGIN TRAN [UPD_TEST2];
+BEGIN TRAN [TEST1b];
 
-DECLARE	@NVAL AS INT;
+	SELECT	SVAL
+	FROM	[dbo].[Test01]
+	WHERE	NVAL = 1;
 
-SELECT	@NVAL = [NVAL]
-FROM	[dbo].[Test01]
-WHERE	SVAL = N'1';
+COMMIT TRAN [TEST1b];
+*/
+;
+-- Ex 4: RU writer blocks RU writer.
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 
-SELECT	@NVAL;
+BEGIN TRAN [TEST2b];
 
-UPDATE [dbo].[Test01]
-	SET NVAL = @NVAL
-WHERE	SVAL = N'3';
+	DECLARE	@NVAL AS INT;
 
-COMMIT TRAN [UPD_TEST2];
+	UPDATE [dbo].[Test01]
+		SET SVAL = N'one-UPD'
+	WHERE	NVAL = 1;
+
+	SELECT	*
+	FROM	[dbo].[Test01]
+	WHERE	NVAL = 1;
+
+ROLLBACK TRAN [TEST2b];
+
+-- Ex X: Deadlock.
+/*
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+BEGIN TRAN [DL_TEST2];
+
+	DECLARE	@NVAL AS INT;
+
+	SELECT	@NVAL = [NVAL]
+	FROM	[dbo].[Test01]
+	WHERE	SVAL = N'1';
+
+	SELECT	@NVAL;
+
+	UPDATE [dbo].[Test01]
+		SET NVAL = @NVAL
+	WHERE	SVAL = N'3';
+
+COMMIT TRAN [DL_TEST2];
+*/
 
 SELECT	@@TRANCOUNT, XACT_STATE();
 
@@ -37,7 +72,7 @@ WHERE	database_id = DB_ID(N'ScratchDB');
 SELECT	'dm_tran_locks', *
 FROM	sys.dm_tran_locks
 WHERE	resource_database_id = DB_ID(N'ScratchDB')
-		AND request_session_id IN (53, 52)
+		AND request_session_id IN (54, 55)
 ORDER BY request_session_id
 ; --= @@SPID
 
