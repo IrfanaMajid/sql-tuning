@@ -65,7 +65,7 @@ COMMIT TRAN [DL_TEST1];
 
 SELECT	'dm_exec_sessions', *
 FROM	sys.dm_exec_sessions
-WHERE	database_id = DB_ID(N'ScratchDB')
+WHERE	database_id = DB_ID(N'IMData')
 		AND session_id IN (53, 57);
 
 SELECT	'dm_tran_active_transactions', *
@@ -74,20 +74,29 @@ WHERE	name LIKE N'UPD_TEST%';
 
 SELECT	'dm_tran_database_transactions', *
 FROM	sys.dm_tran_database_transactions
-WHERE	database_id = DB_ID(N'ScratchDB');
+WHERE	database_id = DB_ID(N'IMData');
 
 -- Best way to view locks and lock metadata.
 SELECT	'dm_tran_locks', *
 FROM	sys.dm_tran_locks
-WHERE	resource_database_id = DB_ID(N'ScratchDB')
+WHERE	resource_database_id = DB_ID(N'IMData')
 		AND request_session_id IN (54, 55)
 ORDER BY request_session_id
 ; --= @@SPID
 
 -- Shows blocker session
-SELECT	'dm_exec_requests', *
-FROM	sys.dm_exec_requests
-WHERE	session_id IN (53, 57);
+SELECT	'dm_exec_requests'
+		, SUBSTRING(sql.text, (r.statement_start_offset/2) + 1,
+				((CASE r.statement_end_offset
+					WHEN -1
+					THEN DATALENGTH(sql.text)
+					ELSE r.statement_end_offset
+				END - r.statement_start_offset)/2) + 1) AS query_text
+		, r.*
+		, sql.*
+FROM	sys.dm_exec_requests AS r
+	CROSS APPLY sys.dm_exec_sql_text(sql_handle) AS sql
+WHERE	r.session_id <> @@SPID;
 
 SELECT	'DBlocks', *
 FROM	dbo.DBlocks;
