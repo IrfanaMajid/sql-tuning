@@ -3,7 +3,7 @@
   <Items>
     <LogicalFolder Name="Connections" Type="2" Sorted="true">
       <Items>
-        <ConnectionNode Name="FL1CPBIDBCL1\SHIELD:USCORP\ricardogu">
+        <ConnectionNode Name="FL1CPBIDBCL1\SHIELD:USCORP\RicardoGu">
           <Created>2018-09-10T12:30:58.3221091-04:00</Created>
           <Type>SQL</Type>
           <Server>FL1CPBIDBCL1\SHIELD</Server>
@@ -15,7 +15,7 @@
           <ConnectionProtocol>NotSpecified</ConnectionProtocol>
           <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
         </ConnectionNode>
-        <ConnectionNode Name="localhost:USCORP\ricardogu">
+        <ConnectionNode Name="localhost:USCORP\RicardoGu">
           <Created>2018-02-18T16:32:15.6943322-05:00</Created>
           <Type>SQL</Type>
           <Server>localhost</Server>
@@ -27,7 +27,7 @@
           <ConnectionProtocol>NotSpecified</ConnectionProtocol>
           <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
         </ConnectionNode>
-        <ConnectionNode Name="localhost\MSSQLSERVER12:USCORP\ricardogu">
+        <ConnectionNode Name="localhost\MSSQLSERVER12:USCORP\RicardoGu">
           <Created>2018-09-10T12:30:33.7224308-04:00</Created>
           <Type>SQL</Type>
           <Server>localhost\MSSQLSERVER12</Server>
@@ -43,6 +43,12 @@
     </LogicalFolder>
     <LogicalFolder Name="Queries" Type="0" Sorted="true">
       <Items>
+        <FileNode Name="1_QueryProfiling.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:localhost:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>localhost</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>1_QueryProfiling.sql</FullPath>
+        </FileNode>
         <FileNode Name="2_LogFiles.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:FL1CPBIDBCL1\SHIELD:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>FL1CPBIDBCL1\SHIELD</AssociatedConnSrvName>
@@ -68,8 +74,8 @@
           <FullPath>4_Indexes_HEAP.sql</FullPath>
         </FileNode>
         <FileNode Name="5_Plans.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:localhost\MSSQLSERVER12:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>localhost\MSSQLSERVER12</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:localhost:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>localhost</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>5_Plans.sql</FullPath>
         </FileNode>
